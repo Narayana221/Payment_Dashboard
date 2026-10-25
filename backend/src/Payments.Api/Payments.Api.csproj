@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Payments.Application\Payments.Application.csproj" />
+    <!-- Only for AddInfrastructure() in Program.cs; controllers depend on Application abstractions. -->
+    <ProjectReference Include="..\Payments.Infrastructure\Payments.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

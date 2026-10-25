@@ -1,0 +1,30 @@
+@if (issues().length > 0) {
+  <section
+    class="tile"
+    [class.panel--warning]="excluded().length > 0"
+    aria-labelledby="data-notes-heading"
+  >
+    <h2 id="data-notes-heading" class="section-title">Data notes</h2>
+    @if (excluded().length > 0) {
+      <p>
+        <strong>{{ excludedSummary() }}</strong>
+        Your figures leave these out until the data is corrected.
+      </p>
+      <ul>
+        @for (issue of excluded(); track issue.type + issue.recordIds.join()) {
+          <li>{{ issue.message }}</li>
+        }
+      </ul>
+    }
+    @if (informational().length > 0) {
+      <details>
+        <summary>{{ informationalSummary() }}</summary>
+        <ul>
+          @for (issue of informational(); track issue.type + issue.recordIds.join()) {
+            <li>{{ issue.message }}</li>
+          }
+        </ul>
+      </details>
+    }
+  </section>
+}

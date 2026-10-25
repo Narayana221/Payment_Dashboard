@@ -1,0 +1,9 @@
+<dl class="tile stat-card" [class]="'stat-card--' + variant()">
+  <dt class="label">{{ label() }}</dt>
+  <dd class="figure stat-card__value">
+    <app-money [value]="value()" [tone]="variant() === 'default' ? tone() : 'neutral'" />
+  </dd>
+  @if (hint()) {
+    <dd class="stat-card__hint">{{ hint() }}</dd>
+  }
+</dl>

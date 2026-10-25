@@ -1,0 +1,40 @@
+@if (buckets().length === 0) {
+  <p class="muted">
+    Nothing still to come: everything you've earned has been paid out or is on its way.
+  </p>
+} @else {
+  <table class="data-table">
+    <caption class="visually-hidden">
+      Money still to come, by the date it becomes available
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Availability</th>
+        <th scope="col" class="amount">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (bucket of buckets(); track bucket.availableOn) {
+        <tr>
+          <th scope="row">
+            @if (bucket.isAvailable) {
+              Available now
+              <span class="muted"
+                >(since {{ bucket.availableOn | date: 'EEE d MMM y' }}), waiting for your next
+                payout</span
+              >
+            } @else {
+              Available from {{ bucket.availableOn | date: 'EEE d MMM y' }}
+            }
+            @if (bucket.amount.amountMinor < 0) {
+              <span class="note"
+                >Refunds of sales that were already paid out are taken from future funds.</span
+              >
+            }
+          </th>
+          <td class="amount"><app-money [value]="bucket.amount" /></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

@@ -1,0 +1,57 @@
+<div class="cards">
+  <app-stat-card
+    label="Paid into your bank"
+    [value]="summary().paidOut"
+    hint="Arrived in your account"
+  />
+  <app-stat-card
+    label="On its way to your bank"
+    [value]="summary().inTransit"
+    hint="Sent, not yet arrived"
+  />
+  <app-stat-card
+    label="Still to come"
+    [value]="summary().stillToCome"
+    hint="Earned, not yet paid out"
+    variant="light"
+  />
+</div>
+
+<div class="details">
+  <section class="tile" aria-labelledby="availability-heading">
+    <h3 id="availability-heading" class="label">Still to come, by when it becomes available</h3>
+    <app-availability-table [buckets]="summary().stillToComeByDate" />
+  </section>
+
+  <section class="tile" aria-labelledby="payouts-heading">
+    <h3 id="payouts-heading" class="label">Payouts</h3>
+    @if (summary().payouts.length === 0) {
+      <p class="muted">No payouts yet.</p>
+    } @else {
+      <table class="data-table">
+        <caption class="visually-hidden">
+          Payouts to your bank
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Payout</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="amount">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (payout of summary().payouts; track payout.id) {
+            <tr>
+              <th scope="row">{{ payout.id }}</th>
+              <td>
+                {{ payout.hasArrived ? 'Arrived' : 'Arriving' }}
+                {{ payout.arrivalDate | date: 'EEE d MMM y' }}
+              </td>
+              <td class="amount"><app-money [value]="payout.amount" /></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+</div>

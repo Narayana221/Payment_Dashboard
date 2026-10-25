@@ -1,0 +1,20 @@
+@Payments.Api_HostAddress = http://localhost:5214
+
+### Dashboard as of the end of the demo weekend (matches the golden figures)
+GET {{Payments.Api_HostAddress}}/api/v1/organisers/acct_demo/dashboard?asOf=2026-06-21T00:00:00Z
+Accept: application/json
+
+### Before po_0001 arrived: it shows as in transit
+GET {{Payments.Api_HostAddress}}/api/v1/organisers/acct_demo/dashboard?asOf=2026-06-17T12:00:00Z
+Accept: application/json
+
+### No offset on asOf: 400 ProblemDetails
+GET {{Payments.Api_HostAddress}}/api/v1/organisers/acct_demo/dashboard?asOf=2026-06-21T00:00:00
+Accept: application/json
+
+### Unknown organiser: 404 ProblemDetails
+GET {{Payments.Api_HostAddress}}/api/v1/organisers/acct_other/dashboard
+Accept: application/json
+
+### Health
+GET {{Payments.Api_HostAddress}}/health

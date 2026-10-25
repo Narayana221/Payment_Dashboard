@@ -1,0 +1,25 @@
+# .NET
+bin/
+obj/
+TestResults/
+*.user
+*.suo
+.vs/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+coverage/
+
+# Editors / OS
+.idea/
+Thumbs.db
+.DS_Store
+
+# Claude Code (personal + generated)
+.claude/settings.local.json
+
+# Secrets
+*.env
+appsettings.*.local.json

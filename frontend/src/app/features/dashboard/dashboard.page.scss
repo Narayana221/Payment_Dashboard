@@ -1,0 +1,86 @@
+:host {
+  display: block;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: var(--gap);
+}
+
+// Top bar: title on the left, the "as of" control on the right.
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: var(--gap);
+  padding: 0.875rem var(--tile-padding);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  h1 {
+    margin: 0;
+    font-size: var(--font-size-heading);
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+  }
+}
+
+// Decorative grid mark, like an app launcher.
+.brand__mark {
+  display: grid;
+  grid-template-columns: repeat(3, 4px);
+  gap: 3px;
+
+  span {
+    width: 4px;
+    height: 4px;
+    background: var(--text);
+  }
+}
+
+.as-of {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.as-of__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.as-of__local {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+}
+
+.currencies {
+  display: flex;
+  gap: 0.375rem;
+}
+
+main:focus {
+  outline: none;
+}
+
+.updating {
+  min-height: 1.25rem;
+  margin: 0 0 0.25rem;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+
+section {
+  margin-bottom: calc(var(--gap) * 2.5);
+}

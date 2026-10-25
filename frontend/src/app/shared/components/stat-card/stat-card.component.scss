@@ -1,0 +1,36 @@
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+.stat-card__value {
+  margin: auto 0 0;
+  padding-top: 1.5rem;
+}
+.stat-card__hint {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-small);
+}
+.stat-card--accent {
+  background: var(--tile-accent);
+  border-color: var(--tile-accent);
+  color: var(--tile-accent-text);
+}
+.stat-card--accent .label,
+.stat-card--accent .stat-card__hint {
+  color: var(--text-on-accent-muted);
+}
+.stat-card--accent .stat-card__value {
+  font-size: var(--font-size-figure-lg);
+}
+.stat-card--light {
+  background: var(--tile-light);
+  border-color: var(--tile-light);
+  color: var(--tile-light-text);
+}
+.stat-card--light .label,
+.stat-card--light .stat-card__hint {
+  color: var(--text-on-light-muted);
+}

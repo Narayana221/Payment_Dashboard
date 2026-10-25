@@ -1,0 +1,37 @@
+<p class="scope">
+  All time, up to
+  @if (asOf(); as asOf) {
+    {{ asOf | date: 'EEE d MMM y, HH:mm' : 'UTC' }} UTC
+  } @else {
+    now
+  }
+</p>
+<p class="explanation">{{ explanation() }}</p>
+<table class="data-table">
+  <caption class="visually-hidden">
+    From gross sales to the money in your bank
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Step</th>
+      <th scope="col" class="bar-col" aria-hidden="true"></th>
+      <th scope="col" class="amount">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of rows(); track row.label) {
+      <tr [class]="'row--' + row.kind">
+        <th scope="row">
+          <span class="step-name">{{ row.label }}</span>
+          @if (row.detail) {
+            <span class="detail">{{ row.detail }}</span>
+          }
+        </th>
+        <td class="bar-col" aria-hidden="true">
+          <span class="bar" [class]="'bar--' + row.kind" [style.width.%]="row.barPercent"></span>
+        </td>
+        <td class="amount"><app-money [value]="row.amount" [display]="display[row.kind]" /></td>
+      </tr>
+    }
+  </tbody>
+</table>

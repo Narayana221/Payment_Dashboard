@@ -1,0 +1,48 @@
+.data-table td,
+.data-table th {
+  vertical-align: middle;
+}
+.row--total th,
+.row--total td {
+  font-weight: 700;
+  border-top: 1px solid var(--text-muted);
+}
+.scope {
+  margin: 0 0 0.25rem;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+.explanation {
+  margin: 0 0 1rem;
+  font-size: var(--font-size-small);
+}
+.detail {
+  display: block;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  font-weight: 400;
+}
+.data-table .amount {
+  width: 8rem;
+}
+.bar-col {
+  width: 35%;
+}
+.bar {
+  display: block;
+  height: 1.25rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  min-width: 2px;
+}
+.bar--deduction,
+.bar--adjustment {
+  background: var(--bar-neutral);
+}
+@media (max-width: 30rem) {
+  .bar-col {
+    display: none;
+  }
+}

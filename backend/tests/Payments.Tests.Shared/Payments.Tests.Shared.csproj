@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Payments.Domain\Payments.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Payments.Infrastructure\Payments.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Payments.Application\Payments.Application.csproj" />
+  </ItemGroup>
+
+  <!-- The real extract, shared by the golden-figure tests. -->
+  <ItemGroup>
+    <None Include="..\..\..\records.json" Link="Data\records.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

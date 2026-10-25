@@ -1,0 +1,86 @@
+<header class="top-bar">
+  <div class="brand">
+    <span class="brand__mark" aria-hidden="true">
+      @for (dot of markDots; track $index) {
+        <span></span>
+      }
+    </span>
+    <h1>Payments</h1>
+  </div>
+
+  <form class="as-of" (submit)="$event.preventDefault(); applyAsOf(asOfInput.value)">
+    <label for="as-of" class="label">Figures as of (UTC)</label>
+    <div class="as-of__controls">
+      <input
+        #asOfInput
+        id="as-of"
+        type="datetime-local"
+        [value]="asOfInputValue()"
+        [attr.aria-describedby]="store.asOf() ? 'as-of-local' : null"
+      />
+      <button type="submit">Apply</button>
+      @if (store.latestActivityAt()) {
+        <button type="button" (click)="showLatestActivity(asOfInput)">Latest activity</button>
+      }
+    </div>
+    @if (store.asOf(); as asOf) {
+      <p id="as-of-local" class="as-of__local">
+        Your local time: {{ asOf | date: 'EEE d MMM y, HH:mm' }}
+      </p>
+    }
+  </form>
+
+  @if (store.currencies().length > 1) {
+    <div class="currencies" role="group" aria-label="Currency">
+      @for (currency of store.currencies(); track currency) {
+        <button
+          type="button"
+          [attr.aria-pressed]="currency === store.summary()?.currency"
+          (click)="store.selectCurrency(currency)"
+        >
+          {{ currency }}
+        </button>
+      }
+    </div>
+  }
+</header>
+
+<main #main tabindex="-1" [attr.aria-busy]="store.isUpdating() || store.isLoading()">
+  <p class="updating" role="status">{{ store.isUpdating() ? 'Updating…' : '' }}</p>
+
+  @if (store.error(); as error) {
+    <app-error-state [message]="error.message" (retry)="retry(main)" />
+  } @else if (store.isLoading()) {
+    <app-loading-state />
+  } @else if (store.summary(); as summary) {
+    <section aria-labelledby="made-heading">
+      <h2 id="made-heading" class="section-title">What you've made</h2>
+      @if (store.breakdown(); as breakdown) {
+        <app-period-summary
+          [breakdown]="breakdown"
+          [period]="store.period()"
+          (periodChange)="store.setPeriod($event)"
+        />
+      }
+    </section>
+
+    <section aria-labelledby="paid-heading">
+      <h2 id="paid-heading" class="section-title">What you've been paid</h2>
+      <app-payout-position [summary]="summary" />
+    </section>
+
+    <section aria-labelledby="difference-heading">
+      <h2 id="difference-heading" class="section-title">
+        Why your bank balance differs from your sales
+      </h2>
+      <div class="tile">
+        <app-reconciliation-waterfall [summary]="summary" [asOf]="store.asOf()" />
+      </div>
+    </section>
+
+    <app-data-quality-panel [issues]="store.dataQuality()" />
+  } @else {
+    <app-empty-state />
+    <app-data-quality-panel [issues]="store.dataQuality()" />
+  }
+</main>

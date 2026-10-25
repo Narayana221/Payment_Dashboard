@@ -1,0 +1,31 @@
+<div class="period-picker" role="group" aria-label="Period">
+  @for (key of periodKeys; track key) {
+    <button type="button" [attr.aria-pressed]="key === period()" (click)="periodChange.emit(key)">
+      {{ labels[key] }}
+    </button>
+  }
+</div>
+
+<div class="bento">
+  <app-stat-card
+    class="bento__hero"
+    label="Net earned"
+    [value]="breakdown().netEarned"
+    hint="What you keep after fees and refunds"
+    variant="accent"
+  />
+  <app-stat-card label="Gross sales" [value]="breakdown().grossSales" [hint]="salesHint()" />
+  <app-stat-card label="Refunds issued" [value]="breakdown().refundsIssued" [hint]="refundHint()" />
+  <app-stat-card
+    label="Stripe fees"
+    [value]="breakdown().stripeFees"
+    hint="Not returned on refunds"
+    tone="neutral"
+  />
+  <app-stat-card
+    label="Ticket Tailor fees"
+    [value]="breakdown().ticketTailorFees"
+    [hint]="ticketTailorHint()"
+    tone="neutral"
+  />
+</div>
